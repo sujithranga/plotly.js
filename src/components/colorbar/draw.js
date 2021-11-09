@@ -224,15 +224,18 @@ function drawColorBar(g, opts, gd) {
         optsY * gs.h + ypad
     );
 
+    var xRatio = {center: 0.5, right: 1}[xanchor] || 0;
+    var yRatio = {top: -0.5, bottom: 0.5}[yanchor] || 0;
+
     // for dragging... this is getting a little muddled...
     var cLeftFrac = isVertical ?
-        optsX - thickFrac * ({center: 0.5, right: 1}[xanchor] || 0) :
-        optsY - thickFrac * ({top: -0.5, bottom: 0.5}[yanchor] || 0);
+        optsX - xRatio * thickFrac :
+        optsY - yRatio * thickFrac;
 
     // y positioning we can do correctly from the start
     var cBottomFrac = isVertical ?
-        optsY + lenFrac * (({top: -0.5, bottom: 0.5}[yanchor] || 0) - 0.5) :
-        optsX + lenFrac * (({center: 0.5, right: 1}[xanchor] || 0) - 0.5);
+        optsY + (yRatio - 0.5) * lenFrac :
+        optsX + (xRatio - 0.5) * lenFrac;
 
     var cBottomPx = Math.round(isVertical ?
         gs.h * (1 - cBottomFrac) :
