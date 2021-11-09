@@ -67,9 +67,7 @@ module.exports = function colorbarDefaults(containerIn, containerOut, layout) {
         }
     }, 'ticklabelposition');
 
-    coerce('ticklabeloverflow', ticklabelposition.indexOf('inside') !== -1 ? 'hide past domain' :
-        isVertical ? 'hide past div' : 'allow'
-    );
+    coerce('ticklabeloverflow', ticklabelposition.indexOf('inside') !== -1 ? 'hide past domain' : 'hide past div');
 
     handleTickValueDefaults(colorbarIn, colorbarOut, coerce, 'linear');
 
