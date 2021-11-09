@@ -303,8 +303,8 @@ function drawColorBar(g, opts, gd) {
         uFrac + ypad / gs.h,
         uFrac + lenFrac - ypad / gs.h
     ] : [
-        uFrac + xpad / gs.w,
-        uFrac + lenFrac - xpad / gs.w
+        -uFrac + xpad / gs.w,
+        -uFrac + lenFrac - xpad / gs.w
     ];
 
     ax.setScale();
