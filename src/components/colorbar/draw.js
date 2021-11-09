@@ -227,6 +227,11 @@ function drawColorBar(g, opts, gd) {
     var xRatio = {center: 0.5, right: 1}[xanchor] || 0;
     var yRatio = {top: -0.5, bottom: 0.5}[yanchor] || 0;
 
+    if(!isVertical) {
+        // TODO: why am I here?
+        xRatio -= 0.5;
+    }
+
     // for dragging... this is getting a little muddled...
     var vFrac = isVertical ?
         optsX - xRatio * thickFrac :
@@ -615,7 +620,7 @@ function drawColorBar(g, opts, gd) {
         var extraW = borderwidth + outlinewidth;
 
         g.select('.' + cn.cbbg)
-        .attr('x', (isVertical ? vPx : uPx) - extraW / 2 - (isVertical ? xpad : 0))
+        .attr('x', (isVertical ? vPx : uPx) - extraW / 2 - (isVertical ? xpad : lenPx))
         .attr('y', (isVertical ? uPx : vPx) - (isVertical ? lenPx : ypad))
         .attr(isVertical ? 'width' : 'height', Math.max(outerThickness, 2))
         .attr(isVertical ? 'height' : 'width', Math.max(lenPx + extraW, 2))
@@ -624,7 +629,7 @@ function drawColorBar(g, opts, gd) {
         .style('stroke-width', borderwidth);
 
         g.selectAll('.' + cn.cboutline)
-        .attr('x', (isVertical ? vPx : uPx + xpad))
+        .attr('x', (isVertical ? vPx : uPx + xpad - lenPx))
         .attr('y', (isVertical ? uPx + ypad - lenPx : vPx) + (titleSide === 'top' ? titleHeight : 0))
         .attr(isVertical ? 'width' : 'height', Math.max(thickPx, 2))
         .attr(isVertical ? 'height' : 'width', Math.max(lenPx - (isVertical ?
@@ -637,9 +642,15 @@ function drawColorBar(g, opts, gd) {
             'stroke-width': outlinewidth
         });
 
-        // fix positioning for xanchor!='left'
-        var xoffset = ({center: 0.5, right: 1}[xanchor] || 0) * outerThickness;
-        g.attr('transform', strTranslate(gs.l - xoffset, gs.t));
+        if(isVertical) {
+            // fix positioning for xanchor!='left'
+            var xoffset = xRatio * outerThickness;
+            g.attr('transform', strTranslate(gs.l - xoffset, gs.t));
+        } else {
+            // fix positioning for yanchor!='top'
+            //var yoffset = yRatio * outerThickness;
+            //g.attr('transform', strTranslate(gs.l, gs.t - yoffset));
+        }
 
         // auto margin adjustment
         var marginOpts = {};
