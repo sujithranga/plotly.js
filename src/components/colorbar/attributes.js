@@ -10,7 +10,7 @@ module.exports = overrideAll({
     orientation: {
         valType: 'enumerated',
         values: ['h', 'v'],
-        dflt: 'v',
+        dflt: 'h',
         description: 'Sets the orientation of the colorbar.'
     },
     thicknessmode: {
