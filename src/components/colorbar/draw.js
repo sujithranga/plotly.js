@@ -237,10 +237,7 @@ function drawColorBar(g, opts, gd) {
         optsY + (yRatio - 0.5) * lenFrac :
         optsX + (xRatio - 0.5) * lenFrac;
 
-    var cBottomPx = Math.round(isVertical ?
-        gs.h * (1 - cBottomFrac) :
-        gs.w * (1 - cBottomFrac)
-    );
+    var cBottomPx = Math.round(_h * (1 - cBottomFrac));
 
     // stash a few things for makeEditable
     opts._lenFrac = lenFrac;
