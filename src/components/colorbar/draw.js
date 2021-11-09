@@ -224,12 +224,15 @@ function drawColorBar(g, opts, gd) {
         optsY * gs.h + ypad
     );
 
-    var xRatio = {center: 0.5, right: 1}[xanchor] || 0;
-    var yRatio = {top: -0.5, bottom: 0.5}[yanchor] || 0;
+    var xRatio;
+    var yRatio;
 
-    if(!isVertical) {
-        // TODO: why am I here?
-        xRatio -= 0.5;
+    if(isVertical) {
+        xRatio = {center: 0.5, right: 1}[xanchor] || 0;
+        yRatio = {top: -0.5, bottom: 0.5}[yanchor] || 0;
+    } else {
+        xRatio = {left: -0.5, right: 0.5}[xanchor] || 0;
+        yRatio = {top: 0.5, bottom: 1}[yanchor] || 0;
     }
 
     // for dragging... this is getting a little muddled...
@@ -502,7 +505,6 @@ function drawColorBar(g, opts, gd) {
             ]
             .map(ax.c2p)
             .map(Math.round);
-
 
             // offset the side adjoining the next rectangle so they
             // overlap, to prevent antialiasing gaps
