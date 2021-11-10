@@ -481,7 +481,7 @@ function drawColorBar(g, opts, gd) {
 
         axLayer.attr('transform', isVertical ?
             strTranslate(0, Math.round(-gs.t)) :
-            strTranslate(Math.round(-gs.l), 0)
+            strTranslate(Math.round(-gs.l - 2 * xRatio * lenPx), 0)
         );
 
         var fills = g.select('.' + cn.cbfills)
