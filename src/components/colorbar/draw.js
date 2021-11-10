@@ -303,8 +303,8 @@ function drawColorBar(g, opts, gd) {
         uFrac + ypad / gs.h,
         uFrac + lenFrac - ypad / gs.h
     ] : [
-        -uFrac + xpad / gs.w,
-        -uFrac + lenFrac - xpad / gs.w
+        uFrac + xpad / gs.w,
+        uFrac + lenFrac - xpad / gs.w
     ];
 
     ax.setScale();
@@ -476,7 +476,7 @@ function drawColorBar(g, opts, gd) {
         g.selectAll('.' + cn.cbfills + ',.' + cn.cblines)
             .attr('transform', isVertical ?
                 strTranslate(0, Math.round(gs.h * (1 - ax.domain[1]))) :
-                strTranslate(Math.round(gs.w * ax.domain[0]), 0)
+                strTranslate(Math.round(gs.w * (1 - ax.domain[1])), 0)
             );
 
         axLayer.attr('transform', isVertical ?
