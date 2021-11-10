@@ -650,8 +650,8 @@ function drawColorBar(g, opts, gd) {
             g.attr('transform', strTranslate(gs.l - xoffset, gs.t));
         } else {
             // fix positioning for yanchor!='top'
-            //var yoffset = yRatio * outerThickness;
-            //g.attr('transform', strTranslate(gs.l, gs.t - yoffset));
+            var yoffset = yRatio * outerThickness;
+            g.attr('transform', strTranslate(gs.l, gs.t - yoffset));
         }
 
         // auto margin adjustment
